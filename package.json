@@ -1,0 +1,19 @@
+{
+  "name": "amharic-ocr",
+  "version": "1.0.0",
+  "description": "Front end for image to text converter for Amharic language",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmharicOCR/front-end.git"
+  },
+  "author": "John Assefa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmharicOCR/front-end/issues"
+  },
+  "homepage": "https://github.com/AmharicOCR/front-end#readme"
+}
