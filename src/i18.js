@@ -13,6 +13,7 @@ const resources = {
       translated: "Translated Text:",
       file_preview_image: "Preview of Your Image",
       file_preview_pdf: "PDF File",
+      header_text: "Extract Text from Image or PDF",
     }
   },
   am: {
@@ -25,6 +26,7 @@ const resources = {
       translated: "ትርጉም:",
       file_preview_image: "ምስል ፕሪቭው ተመን",
       file_preview_pdf: "PDF ፋይል",
+        header_text: "ጽሁፍ ከ ምስል ወይም PDF ይገባሉ",
     }
   }
 };

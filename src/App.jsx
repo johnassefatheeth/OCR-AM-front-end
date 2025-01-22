@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { AiFillFilePdf } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
-import './i18'; 
+import './i18'; // Ensure you have your i18n configuration
 
 function App() {
   const { t, i18n } = useTranslation(); // Access translation function and language change method
   const [file, setFile] = useState(null);
   const [error, setError] = useState('');
   const [fileTypeError, setFileTypeError] = useState('');
+
+  const [isAmharic, setIsAmharic] = useState(i18n.language === 'am'); // Track if the language is Amharic
 
   // Handle the drop of the file
   const onDrop = (acceptedFiles) => {
@@ -62,32 +64,35 @@ function App() {
     alert(t('extract'));
   };
 
-  
-
-  // Handle language change
+  // Handle language change with toggle switch
   const handleLanguageChange = (lang) => {
     i18n.changeLanguage(lang); // Switch language
+    setIsAmharic(lang === 'am'); // Update language state
   };
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 p-6">
-      <h2 className="text-2xl font-semibold text-gray-700">{t('drag_drop')}</h2>
-
-      {/* Language Switcher */}
-      <div className="mt-4">
-        <button
-          onClick={() => handleLanguageChange('en')}
-          className="mx-2 px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400"
-        >
-          English
-        </button>
-        <button
-          onClick={() => handleLanguageChange('am')}
-          className="mx-2 px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400"
-        >
-          አማርኛ
-        </button>
+      {/* Language Switcher as a toggle */}
+      <div className="flex float-end w-full mr-40 mb-4 ml-0 justify-end items-center">
+        <span className="mr-2 text-lg">{isAmharic ? 'አማርኛ' : 'English'}</span>
+        <label htmlFor="language-toggle" className="flex items-center cursor-pointer">
+          <div className="relative">
+            <input
+              id="language-toggle"
+              type="checkbox"
+              className="sr-only"
+              checked={isAmharic} // Set the switch state based on the language
+              onChange={(e) => handleLanguageChange(e.target.checked ? 'am' : 'en')} // Change language when toggled
+            />
+            <div className="block bg-gray-400 w-12 h-6 rounded-full"></div>
+            <div
+              className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all ${isAmharic ? 'transform translate-x-6' : ''}`}
+            ></div>
+          </div>
+        </label>
       </div>
+      <h1 className={`text-4xl mb-20 mt-40 font-bold ${i18n.language === 'en' ? 'font-jost' : ''}`}>{t('header_text')}</h1>
+      <h2 className="text-2xl font-semibold text-gray-700">{t('drag_drop')}</h2>
 
       <div
         {...getRootProps()}
@@ -141,12 +146,7 @@ function App() {
       )}
 
       {/* Translate Section */}
-      <div className="mt-8 text-center w-full max-w-md">
-       
-        
-
-        
-      </div>
+      <div className="mt-8 text-center w-full max-w-md"></div>
     </div>
   );
 }
