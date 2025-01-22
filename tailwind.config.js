@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        jost: ['Jost', 'sans-serif'], 
+        jost: ['Jost', 'sans-serif'],
+        amharic: ['AmharicFont', 'serif'], 
       },
   },
   plugins: [],

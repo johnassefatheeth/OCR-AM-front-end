@@ -91,8 +91,8 @@ function App() {
           </div>
         </label>
       </div>
-      <h1 className={`text-4xl mb-20 mt-40 font-bold ${i18n.language === 'en' ? 'font-jost' : ''}`}>{t('header_text')}</h1>
-      <h2 className="text-2xl font-semibold font-jost text-gray-700">{t('drag_drop')}</h2>
+      <h1 className={`text-4xl mb-20 mt-40 font-bold ${i18n.language === 'en' ? 'font-jost' : 'font-amharic'}`}>{t('header_text')}</h1>
+      <h2 className={`text-2xl font-semibold  ${i18n.language === 'en' ? 'font-jost' : 'font-amharic'} text-gray-700`}>{t('drag_drop')}</h2>
 
       <div
         {...getRootProps()}
