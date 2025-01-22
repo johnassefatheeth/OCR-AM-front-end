@@ -92,7 +92,7 @@ function App() {
         </label>
       </div>
       <h1 className={`text-4xl mb-20 mt-40 font-bold ${i18n.language === 'en' ? 'font-jost' : ''}`}>{t('header_text')}</h1>
-      <h2 className="text-2xl font-semibold text-gray-700">{t('drag_drop')}</h2>
+      <h2 className="text-2xl font-semibold font-jost text-gray-700">{t('drag_drop')}</h2>
 
       <div
         {...getRootProps()}
@@ -100,7 +100,7 @@ function App() {
       >
         <input {...getInputProps()} />
         <div>
-          <h3 className="text-xl font-semibold text-gray-700">{t('drag_drop')}</h3>
+          <h3 className="text-xl font-semibold font-jost text-gray-700">{t('drag_drop')}</h3>
           <p className="text-gray-500">or click to browse</p>
         </div>
       </div>
@@ -112,7 +112,7 @@ function App() {
       {/* File preview (Image or PDF) */}
       {file && (
         <div className="mt-8 text-center relative">
-          <h3 className="text-2xl font-semibold text-gray-700">
+          <h3 className="text-2xl font-semibold font-jost text-gray-700">
             {file.type === 'image' ? t('file_preview_image') : t('file_preview_pdf')}
           </h3>
           <button
@@ -138,7 +138,7 @@ function App() {
           {/* Extract button */}
           <button
             onClick={handleExtract}
-            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-full text-lg font-semibold hover:bg-blue-700 transition-all duration-200"
+            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-full text-lg font-semibold font-jost hover:bg-blue-700 transition-all duration-200"
           >
             {t('extract')}
           </button>
