@@ -54,6 +54,12 @@ function App() {
     setFileTypeError('');
   };
 
+  const handleExtract = () => {
+    // This is where the logic for extracting content would go.
+    // For now, just show an alert as a placeholder.
+    alert('Extracting content from the file...');
+  };
+
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 p-6">
       <div
@@ -96,6 +102,14 @@ function App() {
               <p className="mt-2 text-gray-700 text-lg">{file.name}</p>
             </div>
           )}
+
+          {/* Extract button */}
+          <button
+            onClick={handleExtract}
+            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-full text-lg font-semibold hover:bg-blue-700 transition-all duration-200"
+          >
+            Extract
+          </button>
         </div>
       )}
     </div>
