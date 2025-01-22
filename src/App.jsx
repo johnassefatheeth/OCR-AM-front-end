@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [image, setImage] = useState(null);
+
+  // Handle the drop of the file
+  const onDrop = (acceptedFiles) => {
+    const file = acceptedFiles[0];
+    if (file) {
+      setImage(URL.createObjectURL(file)); // Create a URL for the image to preview
+    }
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: 'image/*', // Accept only image files
+    multiple: false, // Only allow a single file to be dropped at a time
+  });
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 p-6">
+      <div
+        {...getRootProps()}
+        className="w-full max-w-3xl h-80 border-4 border-dashed border-gray-300 rounded-xl flex justify-center items-center cursor-pointer bg-white text-center p-4"
+      >
+        <input {...getInputProps()} />
+        <div>
+          <h3 className="text-xl font-semibold text-gray-700">Drag & Drop an Image Here</h3>
+          <p className="text-gray-500">or click to browse</p>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+      {image && (
+        <div className="mt-8 text-center">
+          <h3 className="text-2xl font-semibold text-gray-700">Preview of Your Image:</h3>
+          <img src={image} alt="Preview" className="mt-4 max-w-full max-h-96 rounded-lg shadow-lg" />
+        </div>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
