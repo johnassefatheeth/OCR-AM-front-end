@@ -14,6 +14,10 @@ const resources = {
       file_preview_image: "Preview of Your Image",
       file_preview_pdf: "PDF File",
       header_text: "Extract Text from Image or PDF",
+      upload: "Upload",
+      success: "Success",
+      Image_uploaded:"Image uploaded",
+      View_Image:"View Image"
     }
   },
   am: {
@@ -24,9 +28,13 @@ const resources = {
       too_large: "ፋይሉ በጣም እጅግ ትልቅ ነው፣ እባኮትን ከ 10MB በታች ፋይል አስገባ",
       enter_text: " ጽሑፍ አስገባ",
       translated: "ትርጉም:",
-      file_preview_image: "ምስል ፕሪቭው ተመን",
+      file_preview_image: "ምስል ፕሪቭው",
       file_preview_pdf: "PDF ፋይል",
         header_text: "ጽሁፍ ከ ምስል ወይም PDF ይገባሉ",
+        upload: "ጫን",
+        success: "ተሳክቷል",
+        Image_uploaded: "ምስል ተጭኗል",
+        View_Image: "ምስል ይመልከቱ"
     }
   }
 };

@@ -47,9 +47,9 @@ function App() {
           console.log(data);
           setMessage(
             <span>
-              <strong>Success!</strong> Image uploaded.{' '}
+              <strong>{t('success')}</strong> {t('Image_uploaded')}{' '}
               <a href={'http://127.0.0.1:8000/' + data.image_url} target="_blank" rel="noopener noreferrer">
-                View Image
+               {t('View_Image')}
               </a>
             </span>
           );
