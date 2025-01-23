@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { AiFillFilePdf } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
+import axios from 'axios'; // Import axios for HTTP requests
 import './i18'; // Ensure you have your i18n configuration
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
   const [file, setFile] = useState(null);
   const [error, setError] = useState('');
   const [fileTypeError, setFileTypeError] = useState('');
-
+  const [uploading, setUploading] = useState(false); // Track upload state
   const [isAmharic, setIsAmharic] = useState(i18n.language === 'am'); // Track if the language is Amharic
 
   // Handle the drop of the file
@@ -59,17 +60,45 @@ function App() {
     setFileTypeError('');
   };
 
-  const handleExtract = () => {
-    // Placeholder for actual extraction logic
-    alert(t('extract'));
-  };
-
-  // Handle language change with toggle switch
   const handleLanguageChange = (lang) => {
     i18n.changeLanguage(lang); // Switch language
     setIsAmharic(lang === 'am'); // Update language state
   };
 
+  const handleExtract = async () => {
+    if (!file) {
+      setError(t('no_file'));
+      return;
+    }
+  
+    setUploading(true); // Set uploading state to true
+  
+    try {
+      // Create FormData to send the image
+      const formData = new FormData();
+      formData.append('image', file); // Ensure 'image' matches the backend field name
+  
+      // Log FormData content to verify that the file is appended correctly
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}:`, value); // Log each key-value pair in the FormData
+      }
+  
+      // Use axios to send the POST request without setting Content-Type
+      const response = await axios.post('http://127.0.0.1:8000/ocr/upload/', formData);
+  
+      if (response.status === 200) {
+        console.log(response.data); // Handle response data
+        alert(t('upload_success')); // Show success message (use translation)
+      } else {
+        setError(t('upload_errors ') + (response.data.error || 'Unknown error')); // Show error message if upload fails
+      }
+    } catch (error) {
+      console.error(error); // Log the error to the console for debugging
+      setError(t('upload_errore ') + (error.response?.data?.message || error.message)); // Show error if there’s an issue with the request
+    } finally {
+      setUploading(false); // Set uploading state back to false
+    }
+  };
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 p-6">
       {/* Language Switcher as a toggle */}
@@ -139,8 +168,9 @@ function App() {
           <button
             onClick={handleExtract}
             className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-full text-lg font-semibold font-jost hover:bg-blue-700 transition-all duration-200"
+            disabled={uploading} // Disable button while uploading
           >
-            {t('extract')}
+            {uploading ? t('uploading') : t('extract')}
           </button>
         </div>
       )}
