@@ -14,7 +14,7 @@ function App() {
   ];
 
   return (
-    <div className="h-screen md:h-[40rem] [perspective:1000px] relative flex flex-col mx-auto w-full items-start justify-start">
+    <div className="h-full md:h-[40rem] [perspective:1000px] relative flex flex-col mx-auto w-full items-start justify-start ">
       <Tabs tabs={tabs} />
     </div>
   );

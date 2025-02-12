@@ -1,5 +1,5 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
 
 // Translation resources
 const resources = {
@@ -16,12 +16,15 @@ const resources = {
       header_text: "Extract Amharic Text Instantly",
       upload: "Upload",
       success: "Success",
-      Image_uploaded:"Image uploaded",
-      View_Image:"View Image"
-    }
+      Image_uploaded: "Image uploaded",
+      View_Image: "View Image",
+      logo: "Brana",
+      privacy: "*  Your privacy is protected! No data is transmitted or stored."
+    },
   },
   am: {
     translation: {
+      logo: "ብራና",
       drag_drop: "እባኮትን ምስል ወይም PDF ይምረጡ",
       extract: "ጽሁፍ አውጣ",
       error: "እባኮትን ምስል ወይም PDF አስገባ",
@@ -30,13 +33,14 @@ const resources = {
       translated: "ትርጉም:",
       file_preview_image: "ምስል ፕሪቭው",
       file_preview_pdf: "PDF ፋይል",
-        header_text: "ጽሁፍ ከ ምስል ወይም PDF ይገባሉ",
-        upload: "ጫን",
-        success: "ተሳክቷል",
-        Image_uploaded: "ምስል ተጭኗል",
-        View_Image: "ምስል ይመልከቱ"
-    }
-  }
+      header_text: "ጽሁፍ ከ ምስል ወይም PDF ይገባሉ",
+      upload: "ጫን",
+      success: "ተሳክቷል",
+      Image_uploaded: "ምስል ተጭኗል",
+      View_Image: "ምስል ይመልከቱ",
+      privacy: "* ደህንነትዎ የተጠበቀ ነው፡፡ ምንም አይነት መረጃ አይተላለፍም ፣ አይቀመጥም፡፡"
+    },
+  },
 };
 
 i18n.use(initReactI18next).init({

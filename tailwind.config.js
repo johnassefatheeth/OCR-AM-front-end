@@ -1,29 +1,24 @@
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
+import { default as flattenColorPalette } from "tailwindcss/lib/util/flattenColorPalette";
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+export const content = [
+  "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+  "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+  "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
 
-    // Or if using `src` directory:
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  darkMode: "class",
-  theme: {
-    extend: {
-      fontFamily: {
-        jost: ["Jost", "sans-serif"],
-        amharic: ["Noto Sans Ethiopic", "sans-serif"],
-      },
-
+  // Or if using `src` directory:
+  "./src/**/*.{js,ts,jsx,tsx,mdx}",
+];
+export const darkMode = "class";
+export const theme = {
+  extend: {
+    fontFamily: {
+      jost: ["Jost", "sans-serif"],
+      amharic: ['AmharicFont', 'sans-serif'],
     },
   },
-  plugins: [addVariablesForColors],
 };
+export const plugins = [addVariablesForColors];
 
 // This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
 function addVariablesForColors({
