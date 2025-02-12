@@ -1,8 +1,10 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { AiFillFilePdf } from 'react-icons/ai';
+// import { AiFillFilePdf } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 import './i18';
+// import { FileUpload } from './fileUpload.jsx';
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -226,6 +228,8 @@ async function downloadFile(texttobeDownloaded/*, formatType*/) {
       >
         {t('upload')}
       </button>
+
+      {/* <FileUpload onChange={handleImageChange} /> */}
 
       {message && (
         <div className="mt-4 text-lg">
