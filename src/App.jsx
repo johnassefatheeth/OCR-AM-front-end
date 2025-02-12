@@ -26,49 +26,98 @@ function App() {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (!image) {
       setMessage('Error: No file selected.');
       return;
     }
-
+  
     const formData = new FormData();
     formData.append('image', image);
-
-    fetch('http://127.0.0.1:8000/ocr/upload/', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.image_url) {
-          console.log(data);
-          setMessage(
-            <span>
-              <strong>{t('success')}</strong> {t('Image_uploaded')}{' '}
-              <a href={'http://127.0.0.1:8000/' + data.image_url} target="_blank" rel="noopener noreferrer">
-               {t('View_Image')}
-              </a>
-            </span>
-          );
-        } else {
-          setMessage(
-            <span>
-              <strong>Error:</strong> {data.message || 'An error occurred.'}
-            </span>
-          );
-        }
-      })
-      .catch((error) => {
+  
+    try {
+      const response = await fetch('http://127.0.0.1:8000/ocr/upload/', {
+        method: 'POST',
+        body: formData,
+      });
+  
+      const data = await response.json();
+  
+      if (data.image_url) {
+        const imageUrl = 'http://127.0.0.1:8000/' + data.image_url;
+  
+        // Call the text extraction function
+        const extractedText = await extractTextFromImage(imageUrl);
+        downloadFile(extractedText);
+  
+        // Update the message with extracted text
         setMessage(
           <span>
-            <strong>Error:</strong> {error.message || 'An error occurred.'}
+            <strong>{t('success')}</strong> {t('Image_uploaded')}{' '}
+            <a
+              href={imageUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('View_Image')}
+            </a>
+            <br />
+            <strong>{t('Extracted_Text')}:</strong> {extractedText}
           </span>
         );
-      });
+      } else {
+        setMessage(
+          <span>
+            <strong>Error:</strong> {data.message || 'An error occurred.'}
+          </span>
+        );
+      }
+    } catch (error) {
+      setMessage(
+        <span>
+          <strong>Error:</strong> {error.message || 'An error occurred.'}
+        </span>
+      );
+    }
   };
+  // Example function to send a POST request to trigger the download
+async function downloadFile(texttobeDownloaded/*, formatType*/) {
+  const extractedText = texttobeDownloaded;  // Replace with your actual text
+  const formatType = 'pdf';  // You can dynamically set this (txt, docx, or pdf)
+
+  // Create the request payload
+  const payload = {
+      format: formatType,
+      extracted_text: extractedText
+  };
+
+  try {
+      const response = await fetch('/ocr/download/', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+
+      // Check if the response is successful
+      if (response.ok) {
+          // Redirect the user to the download URL
+          window.location.href = data.download_url;
+      } else {
+          console.error('Error:', data.error);
+          alert('An error occurred during the download.');
+      }
+  } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred during the download.');
+  }
+}
+
 
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -89,6 +138,19 @@ function App() {
       setPreviewUrl(e.target.result); // Set the preview URL
     };
     reader.readAsDataURL(file);
+  };
+
+  const extractTextFromImage = async (imageUrl) => {
+    const response = await fetch('http://127.0.0.1:8000/ocr/extract-text/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ image_url: imageUrl }),
+    });
+    const data = await response.json();
+    console.log(data);
+    return data.result.predicted_text || 'No text extracted.';
   };
 
   const { getRootProps, getInputProps } = useDropzone({
