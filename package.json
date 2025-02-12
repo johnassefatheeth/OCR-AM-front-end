@@ -10,20 +10,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tabler/icons-react": "^3.30.0",
     "axios": "^1.7.9",
+    "clsx": "^2.1.1",
     "i18next": "^24.2.1",
+    "motion": "^12.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.3.5",
     "react-i18next": "^15.4.0",
-    "react-icons": "^5.4.0"
+    "react-icons": "^5.4.0",
+    "tailwind-merge": "^3.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@vitejs/plugin-react": "^4.2.0",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8.53.0",
+    "eslint": "^8.57.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
