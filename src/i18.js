@@ -13,7 +13,7 @@ const resources = {
       translated: "Translated Text:",
       file_preview_image: "Preview of Your Image",
       file_preview_pdf: "PDF File",
-      header_text: "Extract Text from Image or PDF",
+      header_text: "Extract Amharic Text Instantly",
       upload: "Upload",
       success: "Success",
       Image_uploaded:"Image uploaded",
