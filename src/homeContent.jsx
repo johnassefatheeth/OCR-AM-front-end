@@ -23,6 +23,9 @@ const HomeContent = () => {
     }
   };
 
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [selectedFormat, setSelectedFormat] = useState("docs"); // Default format
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!image) {
@@ -41,17 +44,8 @@ const HomeContent = () => {
       if (data.image_url) {
         const imageUrl = "http://127.0.0.1:8000/" + data.image_url;
         const extractedText = await extractTextFromImage(imageUrl);
-        downloadFile(extractedText);
-        setMessage(
-          <span>
-            <strong>{t("success")}</strong> {t("Image_uploaded")}{" "}
-            <a href={imageUrl} target="_blank" rel="noopener noreferrer">
-              {t("View_Image")}
-            </a>
-            <br />
-            <strong>{t("Extracted_Text")}:</strong> {extractedText}
-          </span>
-        );
+        setMessage(extractedText);
+
       } else {
         setMessage(
           <span>
@@ -68,16 +62,16 @@ const HomeContent = () => {
     }
   };
 
-  const downloadFile = async (texttobeDownloaded) => {
+  const downloadFile = async (texttobeDownloaded,formatType='docx') => {
     const extractedText = texttobeDownloaded;
-    const formatType = "pdf";
+    // const formatType = "docx";
     const payload = {
       format: formatType,
       extracted_text: extractedText,
     };
 
     try {
-      const response = await fetch("/ocr/download/", {
+      const response = await fetch("http://127.0.0.1:8000/ocr/download/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -85,8 +79,11 @@ const HomeContent = () => {
         body: JSON.stringify(payload),
       });
       const data = await response.json();
+      
       if (response.ok) {
-        window.location.href = data.download_url;
+        const downloadUrl = "http://127.0.0.1:8000" + data.download_url;
+    
+        window.open(downloadUrl, '_blank');
       } else {
         console.error("Error:", data.error);
         alert("An error occurred during the download.");
@@ -221,7 +218,41 @@ const HomeContent = () => {
         {t("upload")}
       </button>
 
-      {message && <div className="mt-4 text-lg">{message}</div>}
+      {message && <div className="mt-4 w-full max-w-3xl">
+    <h3 className="text-2xl font-semibold font-jost text-gray-700">
+      {t("Extracted_Text")}:
+    </h3>
+    <textarea
+      value={message.toString()} // Display the extracted text in the textarea
+      readOnly // Make it read-only since it's the extracted text
+      className="mt-4 w-full h-40 p-4 border border-gray-300 rounded-lg shadow-lg resize-none"
+    />
+    {/* Button with dropdown */}
+    <div className="relative">
+        <button
+        onClick={() => setDropdownVisible((prev) => !prev)}
+          className="mt-4 px-6 py-2 bg-gray-700 text-white hover:bg-gray-900 rounded-full text-lg font-semibold font-jost transition-all duration-200"
+        >
+          {t("Download")}
+        </button>
+
+        {dropdownVisible && (
+          <div className="absolute mt-2 bg-white shadow-lg rounded-lg border border-gray-200 w-40 z-10">
+            <ul>
+              {["docx", "pdf", "txt"].map((format) => (
+                <li
+                  key={format}
+                  onClick={() =>  downloadFile(message.toString(),format)} 
+                  className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                >
+                  {format.toUpperCase()}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+  </div>}
     </div>
   );
 };

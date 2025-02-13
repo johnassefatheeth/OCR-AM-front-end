@@ -19,7 +19,8 @@ const resources = {
       Image_uploaded: "Image uploaded",
       View_Image: "View Image",
       logo: "Brana",
-      privacy: "*  Your privacy is protected! No data is transmitted or stored."
+      privacy: "*  Your privacy is protected! No data is transmitted or stored.",
+      Download: "Download"
     },
   },
   am: {
@@ -38,7 +39,9 @@ const resources = {
       success: "ተሳክቷል",
       Image_uploaded: "ምስል ተጭኗል",
       View_Image: "ምስል ይመልከቱ",
-      privacy: "* ደህንነትዎ የተጠበቀ ነው፡፡ ምንም አይነት መረጃ አይተላለፍም ፣ አይቀመጥም፡፡"
+      privacy: "* ደህንነትዎ የተጠበቀ ነው፡፡ ምንም አይነት መረጃ አይተላለፍም ፣ አይቀመጥም፡፡",
+      Download: "አውርድ"
+      
     },
   },
 };
