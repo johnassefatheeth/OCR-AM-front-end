@@ -40,7 +40,7 @@ const ContactContent = () => {
             />
           </div>
           <button
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+            className= "mt-4 px-6 py-2 bg-[#0F0E0E] text-[#E7ECEF] hover:text-[#0F0E0E] rounded-full text-lg font-semibold font-jost hover:bg-[#E7ECEF] hover:outline hover:outline-1 hover:outline-[#0F0E0E] transition-all duration-200"
             type="button"
           >
             Send Message
