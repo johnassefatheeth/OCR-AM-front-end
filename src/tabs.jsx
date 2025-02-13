@@ -34,7 +34,7 @@ export const Tabs = ({
       <h1
         className={`text-left font-semibold`}
       >
-        Abebech
+        Brana
       </h1>
         {propTabs.map((tab, idx) => (
           <button
