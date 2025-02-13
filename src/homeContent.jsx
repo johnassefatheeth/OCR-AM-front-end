@@ -213,6 +213,13 @@ const HomeContent = () => {
           />
         </div>
       )}
+      <h1
+        className={`text-left font-semibold ${
+          i18n.language === "en" ? "font-jost" : "font-amharic"
+        }`}
+      >
+        {t("privacy")}
+      </h1>
 
       <button
         onClick={handleSubmit}
